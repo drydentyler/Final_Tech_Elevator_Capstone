@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taco Catcher</title>
+  <style>
+    canvas {
+      display: block;
+      margin: auto;
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="640" height="480"></canvas>
+  <script>
+    // Get canvas and context
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Game variables
+    const bucket = { x: canvas.width / 2, y: canvas.height - 50, width: 50, height: 30, speed: 5 };
+    const tacos = [];
+    const spawnRate = 2000; // Spawn a taco every 2 seconds
+    let lastSpawn = 0;
+    let score = 0;
+
+    // Load images
+    const tacoImg = new Image();
+    tacoImg.src = "taco.png"; // Path to your taco image
+    const bucketImg = new Image();
+    bucketImg.src = "bucket.png"; // Path to your bucket image
+
+    // Game loop
+    function gameLoop(timestamp) {
+      update(timestamp);
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Update game logic
+    function update(timestamp) {
+      // Add your game logic here
+    }
+
+    // Draw game objects
+    function draw() {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw bucket
+      ctx.drawImage(bucketImg, bucket.x, bucket.y, bucket.width, bucket.height);
+
+      // Draw tacos
+      for (const taco of tacos) {
+        ctx.drawImage(tacoImg, taco.x, taco.y, taco.width, taco.height);
+      }
+
+      // Draw score
+      ctx.font = "24px Arial";
+      ctx.fillStyle = "#000";
+      ctx.fillText(`Score: ${score}`, 10, 30);
+    }
+
+    // Start game
+    requestAnimationFrame(gameLoop);
+  </script>
+</body>
+</html>
